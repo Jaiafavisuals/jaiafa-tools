@@ -1,0 +1,18 @@
+'use strict';
+var assert=require('assert');
+var imageDataUrl=require('../js/image-data-url.js');
+var PNG_BASE64='iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII=';
+var source=Buffer.from(PNG_BASE64,'base64');
+var made=imageDataUrl.fromBuffer(source,Buffer);
+assert.strictEqual(made.ok,true,made.message);
+assert.strictEqual(made.dataUrl.indexOf('data:image/png;base64,iVBOR'),0);
+var payload=made.dataUrl.slice(imageDataUrl.PREFIX.length),decoded=Buffer.from(payload,'base64');
+assert.strictEqual(decoded.slice(0,8).toString('hex'),'89504e470d0a1a0a');
+assert.strictEqual(decoded.length,source.length);
+assert.strictEqual(decoded.equals(source),true);
+var body={messages:[{role:'system',content:'system'},{role:'user',content:[{type:'text',text:'prompt'},{type:'image_url',image_url:{url:made.dataUrl}}]}]};
+assert.strictEqual(JSON.parse(JSON.stringify(body)).messages[1].content[1].image_url.url,made.dataUrl);
+assert.strictEqual(imageDataUrl.validateDataUrl(made.dataUrl,Buffer).ok,true);
+assert.strictEqual(imageDataUrl.fromBase64('\n '+PNG_BASE64.replace(/=$/,'')+' \r\n',Buffer).dataUrl,made.dataUrl);
+assert.strictEqual(imageDataUrl.fromBase64('not a png',Buffer).ok,false);
+console.log('image-data-url tests passed');

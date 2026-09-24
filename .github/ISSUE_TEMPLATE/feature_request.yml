@@ -1,0 +1,37 @@
+name: Feature request
+description: Propose a workflow improvement for designers
+title: "[Feature]: "
+labels:
+  - enhancement
+body:
+  - type: textarea
+    id: pain-point
+    attributes:
+      label: Designer pain point
+      description: What is slow, repetitive, risky, or difficult today?
+    validations:
+      required: true
+  - type: textarea
+    id: workflow
+    attributes:
+      label: Desired workflow
+      description: Describe how the feature should work from start to finish.
+    validations:
+      required: true
+  - type: textarea
+    id: users
+    attributes:
+      label: Who benefits and how often?
+    validations:
+      required: true
+  - type: textarea
+    id: success
+    attributes:
+      label: What does success look like?
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Current workaround
+

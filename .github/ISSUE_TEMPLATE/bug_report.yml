@@ -1,0 +1,63 @@
+name: Bug report
+description: Report a reproducible problem in Jaiafa Tools
+title: "[Bug]: "
+labels:
+  - bug
+body:
+  - type: markdown
+    attributes:
+      value: Thanks for helping improve Jaiafa Tools. Never include API keys or confidential client artwork.
+  - type: input
+    id: plugin-version
+    attributes:
+      label: Jaiafa Tools version
+      placeholder: 4.0.0
+    validations:
+      required: true
+  - type: input
+    id: illustrator-version
+    attributes:
+      label: Illustrator version
+      placeholder: Illustrator 2026, 30.x
+    validations:
+      required: true
+  - type: input
+    id: operating-system
+    attributes:
+      label: Operating system
+      placeholder: macOS 26.x or Windows 11
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      description: Include the smallest reliable sequence of actions.
+      placeholder: "1. Open...\n2. Select...\n3. Click..."
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behavior
+    validations:
+      required: true
+  - type: textarea
+    id: context
+    attributes:
+      label: Additional context
+      description: Add a sanitized screenshot or sample file if it is safe to share.
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Safety check
+      options:
+        - label: I removed API keys, confidential artwork, and assets I cannot share.
+          required: true
+

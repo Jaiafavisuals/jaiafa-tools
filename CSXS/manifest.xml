@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<ExtensionManifest
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    ExtensionBundleId="com.jingo.jaiafatools"
+    ExtensionBundleName="Jaiafa Tools"
+    ExtensionBundleVersion="4.0.0"
+    Version="7.0">
+    <ExtensionList>
+        <Extension Id="com.jingo.jaiafatools.panel" Version="4.0.0" />
+    </ExtensionList>
+    <ExecutionEnvironment>
+        <HostList>
+            <Host Name="ILST" Version="[24.0,99.9]" />
+        </HostList>
+        <LocaleList><Locale Code="All" /></LocaleList>
+        <RequiredRuntimeList><RequiredRuntime Name="CSXS" Version="6.0" /></RequiredRuntimeList>
+    </ExecutionEnvironment>
+    <DispatchInfoList>
+        <Extension Id="com.jingo.jaiafatools.panel">
+            <DispatchInfo>
+                <Resources>
+                    <MainPath>./index.html</MainPath>
+                    <ScriptPath>./jsx/jaiafa-tools.jsx</ScriptPath>
+                    <CEFCommandLine>
+                    <Parameter>--disable-features=SameSiteByDefaultCookies,CookiesWithoutSameSiteMustBeSecure,NetworkService</Parameter>
+                    <Parameter>--disable-site-isolation-trials</Parameter>
+                    <Parameter>--enable-nodejs</Parameter>
+                    <Parameter>--mixed-context</Parameter>
+                </CEFCommandLine>
+                </Resources>
+                <Lifecycle><AutoVisible>true</AutoVisible></Lifecycle>
+                <UI>
+                    <Type>Panel</Type>
+                    <Menu>Jaiafa Tools</Menu>
+                    <Geometry>
+                        <Size><Height>760</Height><Width>370</Width></Size>
+                        <MinSize><Height>460</Height><Width>300</Width></MinSize>
+                        <MaxSize><Height>1800</Height><Width>900</Width></MaxSize>
+                    </Geometry>
+                </UI>
+            </DispatchInfo>
+        </Extension>
+    </DispatchInfoList>
+</ExtensionManifest>
