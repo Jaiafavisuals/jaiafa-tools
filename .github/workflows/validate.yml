@@ -1,0 +1,37 @@
+name: Validate
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Check panel JavaScript syntax
+        run: |
+          node --check js/panel.js
+          node --check js/roadmap-features.js
+          node --check js/workflow-features.js
+
+      - name: Check ExtendScript syntax
+        run: tail -n +2 jsx/jaiafa-tools.jsx | node --check
+
+      - name: Run regression checks
+        run: |
+          node tests/test-image-data-url.js
+          node tests/test-release-features.js
+
+      - name: Validate extension manifest
+        run: python3 -c "import xml.etree.ElementTree as ET; ET.parse('CSXS/manifest.xml')"
