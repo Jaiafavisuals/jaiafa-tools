@@ -28,6 +28,7 @@ Jaiafa Tools is a CEP panel:
 - `css/` contains panel styling.
 - `js/` contains panel-side JavaScript.
 - `jsx/` contains Illustrator ExtendScript host operations.
+- `presets/` contains the bundled production PDF settings imported by Illustrator.
 - `CSXS/manifest.xml` defines extension compatibility and startup.
 - `tests/` contains Node-based regression checks.
 
@@ -41,9 +42,13 @@ From the repository root, run:
 node --check js/panel.js
 node --check js/roadmap-features.js
 node --check js/workflow-features.js
+node --check js/handoff-fonts.js
 tail -n +2 jsx/jaiafa-tools.jsx | node --check
 node tests/test-image-data-url.js
 node tests/test-release-features.js
+node tests/test-handoff-pdf.js
+node tests/test-handoff-fonts.js
+node tests/test-cep-path.js
 ```
 
 Also validate `CSXS/manifest.xml` and test the affected workflow in a supported Illustrator version on the relevant operating system. UI or document-changing features should be checked with a disposable copy of an Illustrator file.

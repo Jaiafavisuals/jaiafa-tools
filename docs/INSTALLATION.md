@@ -1,6 +1,6 @@
 # Installation
 
-Jaiafa Tools 4.0.0 supports Adobe Illustrator 2020 or newer on macOS and Windows. It is a CEP extension, so it appears under **Extensions (Legacy)** rather than the newer UXP plugin menu.
+Jaiafa Tools 4.1.5 supports Adobe Illustrator 2020 or newer on macOS and Windows. It is a CEP extension, so it appears under **Extensions (Legacy)** rather than the newer UXP plugin menu.
 
 ## Before installing
 

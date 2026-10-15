@@ -128,17 +128,48 @@ Select artwork, choose phone, poster, billboard, laptop, or card, and choose Fit
 
 Generation is capped at 250 variations per run. Test with two or three rows before creating a large batch.
 
-## Export and smart handoff
+## Export and production handoff
 
-For a quick export, choose a destination, active or all artboards, PNG/JPG/SVG, and the required scale. For delivery, build a handoff package:
+For a quick export, choose a destination, active or all artboards, PNG/JPG/SVG, and the required scale. For a client or production delivery, use **Production Handoff**:
 
-1. Select the required formats: PNG, JPG, SVG, PDF, and runtime-supported WebP.
-2. Configure token-based names using `{document}`, `{index}`, `{artboard}`, `{format}`, and `{layer}`.
-3. Optionally generate visible-layer PNG passes.
-4. Collect linked files and a copy of the saved Illustrator document when required.
-5. Review the generated font inventory and handoff report.
+1. Save the Illustrator document and its latest changes.
+2. Choose the parent destination and enter the campaign folder name.
+3. Choose all artboards/sizes or only the active artboard.
+4. Set the size-folder name with `{document}`, `{index}`, and `{artboard}` tokens. The default ends in `_AW`.
+5. Keep **Editable working file** enabled for the `_AW.ai` document.
+6. Keep **Outlined text copy** enabled for the separate `_OL.ai` document.
+7. Select PNG, JPG, SVG, PDF, or runtime-supported WebP output.
+8. Optionally generate visible-layer PNG passes.
+9. Build the package and review `Package Report.txt` before delivery.
 
-Jaiafa Tools does not copy font files. Confirm font and linked-asset licensing before distribution.
+Each artboard becomes a self-contained delivery folder:
+
+```text
+Campaign Handoff/
+└── Campaign_1080x1080_AW/
+    ├── Campaign_1080x1080_AW.ai
+    ├── Campaign_1080x1080_OL.ai
+    ├── Campaign_1080x1080_AW.png
+    ├── Links/
+    └── PDF/
+        └── Campaign_1080x1080_AW.pdf
+```
+
+The `_AW.ai` file remains editable. The `_OL.ai` file is produced from a safe temporary copy and has its text converted to outlines; the open source document is never outlined or resaved. Only artwork intersecting the target artboard is retained in that size's Illustrator copies. Linked assets used by that artboard are copied into its `Links` folder and the packaged files are relinked to those copies.
+
+Production PDFs preserve vectors and source image resolution. They use the bundled **Jaiafa Production Print v1** preset, matching the requested High Quality Print settings:
+
+- Standard: None; compatibility: Acrobat 5 (PDF 1.4).
+- Color and grayscale images: Do Not Downsample; Automatic (JPEG), Maximum quality.
+- Monochrome images: Do Not Downsample; CCITT Group 4.
+- Compress Text and Line Art: enabled.
+- Trim Marks: enabled; Roman type, 0.25 pt weight, 6 pt offset (displayed as 2.117 mm).
+- Registration Marks, Color Bars, and Page Information: disabled.
+- Use Document Bleed Settings: enabled; a document with zero bleed exports with zero bleed.
+
+Save the document's latest changes before packaging PDFs. The PDF is generated from a temporary copy of the complete artwork, including objects in the bleed area, with only the chosen artboard exported. The preset is imported into Illustrator automatically. Client-review PDFs retain their separate flattened presentation workflow.
+
+Enable **Include local fonts — I have permission to share them** to collect the fonts used on each artboard into its `Fonts` folder. Jaiafa Tools searches standard local font folders and matches internal PostScript names, including mixed fonts within a text object. Use **Add folder** for another font location. `Fonts Report.txt` lists included, unavailable, restricted, or failed font references. Adobe Fonts activation caches are excluded; recipients need their own activation or license for unavailable fonts. Font licenses must permit sharing; embedding flags alone do not establish redistribution rights. Confirm linked-asset licensing before distribution. The package report records any missing links or text that Illustrator could not outline.
 
 ## Recommended professional workflow
 

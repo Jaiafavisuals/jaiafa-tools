@@ -2,6 +2,51 @@
 
 All notable changes to Jaiafa Tools are documented here.
 
+## 4.1.5 — local test build
+
+- Fixes font collector loading in CEP mixed-context, where CommonJS globals previously prevented the browser API from being exposed.
+- Distinguishes requested, disabled, and failed font collection in package reports.
+- Captures the font option at build time and keeps the build button disabled through font collection.
+- Adds regression coverage for the CEP mixed-context loader.
+
+## 4.1.4 — local test build
+
+- Prompts before building when font files are disabled, making it clear the Fonts folders will contain names only.
+
+## 4.1.3 — local test build
+
+- Makes the font-file sharing option clearer and warns after packaging when font files were not copied.
+- Labels a font manifest explicitly as not copied when the sharing option is off.
+
+## 4.1.2 — local test build
+
+- Continues packaging other artboards when an individual export fails and writes a package report for partial handoffs.
+- Adds a per-size PDF failure note and checks requested export files for existence and nonzero size.
+- Includes a per-size Fonts folder with a clear font manifest; eligible local font files are copied only when the user enables the sharing option.
+- Writes per-size font collection results into that folder's `Fonts Report.txt`.
+
+## 4.1.1 — local test build
+
+- Repairs PDF preset lookup when the CEP host does not supply a script filename, using the extension path from the panel.
+- Reports the precise PDF export stage on errors.
+- Adds optional local font packaging with per-artboard font lists and a collection report.
+- Shows the current build version in the panel header.
+
+## 4.1.0 — in development
+
+### Added
+
+- Added a production handoff structure based on real agency delivery folders.
+- Creates one folder per artboard or banner size.
+- Adds an editable working file ending in `_AW.ai` and a separate `_OL.ai` copy with text converted to outlines.
+- Places PNG/JPG/SVG/WebP previews at the size-folder root and PDFs inside a dedicated `PDF` folder.
+- Collects the linked assets used by each artboard into that artboard's `Links` folder and relinks the packaged Illustrator copies.
+- Keeps the open source document untouched while preparing editable and outlined copies.
+- Exports vector production PDFs with PDF 1.4, no image downsampling, maximum JPEG quality, CCITT Group 4 monochrome compression, 0.25 pt Roman trim marks at a 6 pt offset, and document bleed settings.
+- Fixes PDFs failing in mixed AW/OL/PNG handoffs when Illustrator marks the source modified during packaging. PDFs use the saved file validated at the start; completion messages include a separate PDF count and actual failure reasons.
+- Fixes CEP startup when `$.fileName` is unavailable by passing the extension path explicitly from the panel. PDF errors now identify the failed export stage.
+- Adds optional local font collection into each size's `Fonts` folder, PostScript-name matching, an extra font source folder, and a font collection report. Adobe activation caches and restricted fonts are excluded.
+
 ## 4.0.0
 
 ### Added

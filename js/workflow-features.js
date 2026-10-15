@@ -1,6 +1,6 @@
 (function(){
 'use strict';
-var bridge=window.JTDPBridge,roadmap=window.JTRoadmap,handoffFolder='',csvFilePath='',csvRows=[],qaFixes=[];
+var bridge=window.JTDPBridge,roadmap=window.JTRoadmap,handoffFolder='',handoffFontFolder='',csvFilePath='',csvRows=[],qaFixes=[];
 function $(id){return document.getElementById(id)}
 function qa(sel){return document.querySelectorAll(sel)}
 function callHost(name,args,cb){bridge.callHost(name,args,cb)}
@@ -29,9 +29,29 @@ $('applyQAFixesBtn').addEventListener('click',function(){var payload=selectedFix
 $('runProductionBtn').addEventListener('click',function(){status('Checking production settings, fonts, and linked assets…');callHost('JT_Production_scanFixed',[JSON.stringify(currentKit()),clamp($('qaMinStroke').value,0,100,0.25)],function(r){status(r.message,r.success?'success':'error');if(r.success)roadmap.renderQA(r)})});
 
 // Smart export / handoff package
+function handoffBusy(busy){$('buildHandoffBtn').disabled=busy;$('handoffFonts').disabled=busy;$('chooseHandoffFontsBtn').disabled=busy}
+function finishHandoff(r,includeFonts,fontFolder){
+if(r.path){$('handoffPath').textContent=r.path;$('handoffPath').title=r.path}
+var requests=parseJson(r.fontRequests,[]),fontCount=0,i;for(i=0;i<requests.length;i++)fontCount+=(requests[i].fonts||[]).length;
+if(!includeFonts||!r.path){handoffBusy(false);var note=fontCount&&!includeFonts?' Font files were not copied. Check “Copy local font files — I have permission to share them” and rebuild.':'';status(r.message+note,r.success?(note?'warning':'success'):'error');return}
+function failed(e){var message=e&&e.message?e.message:String(e);status(r.message+' Font collection failed: '+message,'error');callHost('JT_Handoff_recordFontFailure',[r.path,JSON.stringify(requests),message],function(result){handoffBusy(false);if(!result.success)status(r.message+' Font collection failed: '+message+'. Could not update font reports: '+result.message,'error')})}
+status('Collecting local fonts used by each artboard…');
+try{if(!window.JTHandoffFonts||typeof window.JTHandoffFonts.collect!=='function')throw new Error('Font helper did not load. Close and reopen Jaiafa Tools to load the installed update.');if(!requests.length)throw new Error('Illustrator returned no font collection requests. Reopen Jaiafa Tools and rebuild.');window.JTHandoffFonts.collect(r.path,requests,fontFolder).then(function(fonts){handoffBusy(false);status(r.message+' Fonts: '+fonts.copied+' files copied'+(fonts.skipped?' · '+fonts.skipped+' unavailable/skipped; see each Fonts Report.txt.':'.'),r.success?(fonts.skipped?'warning':'success'):'error')},failed)}catch(e){failed(e)}
+}
+$('chooseHandoffFontsBtn').addEventListener('click',function(){callHost('JT_Handoff_chooseFontFolder',[],function(r){if(!r.success){status(r.message,'error');return}handoffFontFolder=r.path;$('handoffFontPath').textContent=r.path;$('handoffFontPath').title=r.path})});
+$('handoffFonts').addEventListener('change',function(){$('handoffFontSettings').classList.toggle('hidden',!this.checked);renderHandoffStructure()});
 $('chooseHandoffFolderBtn').addEventListener('click',function(){callHost('JT_Export_chooseFolder',[],function(r){if(!r.success){status(r.message,'error');return}handoffFolder=r.path;$('handoffPath').textContent=r.path;$('handoffPath').title=r.path;status('Handoff destination selected.','success')})});
 function handoffFormats(){var boxes=qa('[data-handoff-format]'),out=[],i;for(i=0;i<boxes.length;i++)if(boxes[i].checked)out.push(boxes[i].getAttribute('data-handoff-format'));return out}
-$('buildHandoffBtn').addEventListener('click',function(){var formats=handoffFormats();if(!handoffFolder){status('Choose a handoff destination first.','error');return}if(!formats.length){status('Select at least one export format.','error');return}status('Building the complete handoff package…');callHost('JT_Handoff_create',[handoffFolder,$('handoffName').value.trim()||'Client-Handoff',formats.join(','),$('handoffNaming').value.trim()||'{document}_{index}_{artboard}',$('handoffLayerPasses').checked],function(r){status(r.message,r.success?'success':'error');if(r.success&&r.path){$('handoffPath').textContent=r.path;$('handoffPath').title=r.path}})});
+function handoffPreviewName(){var value=$('handoffNaming').value.trim()||'{document}_{artboard}_AW';return value.replace(/\{document\}/gi,'Campaign').replace(/\{index\}/gi,'1').replace(/\{artboard\}/gi,'1080x1080').replace(/\{format\}/gi,'').replace(/\{layer\}/gi,'').replace(/[\\\/:*?"<>|]+/g,'-').replace(/__+/g,'_')}
+function handoffOutlinedName(base){return /_AW$/i.test(base)?base.replace(/_AW$/i,'_OL'):base+'_OL'}
+function renderHandoffStructure(){var base=handoffPreviewName(),formats=handoffFormats(),lines=['Campaign Handoff/','└─ '+base+'/'];if($('handoffEditable').checked)lines.push('   ├─ '+base+'.ai');if($('handoffOutlined').checked)lines.push('   ├─ '+handoffOutlinedName(base)+'.ai');var i,fmt;for(i=0;i<formats.length;i++){fmt=String(formats[i]).toLowerCase();if(fmt!=='pdf')lines.push('   ├─ '+base+'.'+(fmt==='jpeg'?'jpg':fmt))}lines.push('   ├─ Fonts/ (font list; enable sharing to copy files)');lines.push('   ├─ Links/');if(formats.indexOf('pdf')>=0){lines.push('   └─ PDF/');lines.push('      └─ '+base+'.pdf (or failure note)')}else lines.push('   └─ PDF/');if($('handoffLayerPasses').checked)lines.push('   └─ Layer Passes/');$('handoffStructurePreview').textContent=lines.join('\n')}
+$('handoffNaming').addEventListener('input',renderHandoffStructure);
+$('handoffEditable').addEventListener('change',renderHandoffStructure);
+$('handoffOutlined').addEventListener('change',renderHandoffStructure);
+$('handoffLayerPasses').addEventListener('change',renderHandoffStructure);
+Array.prototype.forEach.call(qa('[data-handoff-format]'),function(box){box.addEventListener('change',renderHandoffStructure)});
+$('buildHandoffBtn').addEventListener('click',function(){var formats=handoffFormats(),includeFonts=$('handoffFonts').checked,fontFolder=handoffFontFolder;if(!handoffFolder){status('Choose a handoff destination first.','error');return}if(!formats.length&&!$('handoffEditable').checked&&!$('handoffOutlined').checked){status('Select at least one export or Illustrator file.','error');return}if(!includeFonts&&!window.confirm('Font files are not enabled. Fonts folders will contain a font list only. To include local font files, choose Cancel, check “Copy local font files — I have permission to share them”, then build again.\n\nChoose OK to continue without font files.'))return;handoffBusy(true);status('Building artboard folders, editable artwork, outlined copies, links, PDFs, and font manifests…');callHost('JT_Handoff_createProduction',[handoffFolder,$('handoffName').value.trim()||'Client-Handoff',formats.join(','),$('handoffNaming').value.trim()||'{document}_{artboard}_AW',$('handoffLayerPasses').checked,$('handoffScope').value,$('handoffEditable').checked,$('handoffOutlined').checked,includeFonts],function(r){finishHandoff(r,includeFonts,fontFolder)})});
+renderHandoffStructure();
 
 // CSV parsing and template-driven batch generation
 function readTextFile(path){try{if(window.cep_node&&window.cep_node.require)return window.cep_node.require('fs').readFileSync(path,'utf8')}catch(ignore){}try{var r=window.cep.fs.readFile(path);if(r&&r.err===0)return String(r.data||'')}catch(ignore2){}return''}

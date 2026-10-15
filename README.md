@@ -2,7 +2,7 @@
 
 Jaiafa Tools is a productivity and design-assistance panel for Adobe Illustrator. It brings layout guides, typography, color, campaign resizing, presentation mockups, production QA, client review, batch generation, export handoff, persistent checkpoints, and AI-assisted art direction into one compact CEP extension.
 
-**Current release:** [4.0.0](https://github.com/Jaiafavisuals/jaiafa-tools/releases/latest)  
+**Current release:** 4.1.5 (local test build)<br>
 **Compatibility:** Adobe Illustrator 2020 or newer (CEP/Extensions Legacy)  
 **Platforms:** macOS and Windows
 
@@ -15,7 +15,7 @@ Jaiafa Tools is a productivity and design-assistance panel for Adobe Illustrator
 - **Campaign Resize** — adapt one design to Instagram, Stories, LinkedIn, banners, and custom sizes while preserving visual hierarchy.
 - **Professional client review** — generate polished review boards, add numbered artwork comments, track decisions, and export a client-ready PDF.
 - **Persistent history** — save named checkpoints plus Jaiafa Undo/Redo states inside the Illustrator document.
-- **Smart handoff** — export multiple formats, collect linked assets, produce font inventories, and create a detailed delivery report.
+- **Production handoff** — create a campaign folder with one folder per artboard/size, editable `_AW.ai` and outlined `_OL.ai` files, previews, collected Links, vector PDFs with production trim marks and document bleed, optional local font files, and delivery reports.
 - **CSV Batch Builder** — turn a reusable artboard template into up to 250 controlled content variations.
 - **Everyday production tools** — grids, type scales, color palettes, social presets, vector mockups, and multi-artboard export.
 

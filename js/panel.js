@@ -1,6 +1,7 @@
 (function(){
 'use strict';
 var cs=new CSInterface();
+var extensionPath=cs.getSystemPath('extension');
 var currentPreset='thirds',exportFolder='',reviewFolder='',lastReviewIndex=-1,hostHasDocument=false,scaleValues=[],currentPalette=[],selectedColorIndex=0;
 var socialPreset={w:1080,h:1080,label:'Instagram Post'},mockupKind='phone',dpMode='analyze',dpContext=null,dpResult=null,dpImageDataUrl='',dpImageDiagnostics=null,dpBeforeDataUrl='',dpAfterDataUrl='',dpBeforePreviewPath='',dpAfterPreviewPath='',dpCompareMode='before',dpHistoryCount=0,dpBusy=false,dpReferenceDataUrl='',dpReferenceName='';
 function $(id){return document.getElementById(id)}
@@ -10,7 +11,7 @@ function status(message,kind){var el=$('globalStatus');el.textContent=message||'
 function esc(v){return String(v).replace(/\\/g,'\\\\').replace(/'/g,"\\'").replace(/\r/g,'\\r').replace(/\n/g,'\\n')}
 function enc(v){if(typeof v==='number')return isFinite(v)?String(v):'0';if(typeof v==='boolean')return v?'true':'false';return "'"+esc(v)+"'"}
 function parseHostResponse(raw){var text=String(raw==null?'':raw).replace(/^\uFEFF/,'').trim(),value;if(!text)return{success:false,message:'Illustrator returned an empty response.'};try{value=JSON.parse(text);if(typeof value==='string'){try{value=JSON.parse(value)}catch(ignore){}}if(value&&typeof value==='object')return value}catch(e){}return{success:false,message:'Illustrator returned an unreadable response. Reopen Jaiafa Tools and try again.'}}
-function callHost(name,args,cb){var a=[],i;for(i=0;i<(args||[]).length;i++)a.push(enc(args[i]));cs.evalScript(name+'('+a.join(',')+')',function(raw){if(raw==='EvalScript error.'||raw==='EvalScript error. CEP bridge unavailable.'){cb({success:false,message:'Could not communicate with Illustrator.'});return}cb(parseHostResponse(raw))})}
+function callHost(name,args,cb){var a=[],i;for(i=0;i<(args||[]).length;i++)a.push(enc(args[i]));var setup=extensionPath?'JT_setExtensionPath('+enc(extensionPath)+');':'';cs.evalScript(setup+name+'('+a.join(',')+')',function(raw){if(raw==='EvalScript error.'||raw==='EvalScript error. CEP bridge unavailable.'){cb({success:false,message:'Could not communicate with Illustrator.'});return}cb(parseHostResponse(raw))})}
 function num(id,fallback){var n=Number($(id).value);return isFinite(n)?n:fallback}
 function selectedApplyTo(){var el=q('input[name="applyTo"]:checked');return el?el.value:'artboard'}
 function updateReviewButtons(){if($('buildReviewBtn'))$('buildReviewBtn').disabled=!hostHasDocument;if($('exportReviewPdfBtn'))$('exportReviewPdfBtn').disabled=!hostHasDocument||lastReviewIndex<0||!reviewFolder}
