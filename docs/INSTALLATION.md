@@ -1,13 +1,14 @@
 # Installation
 
-Jaiafa Tools 4.1.5 supports Adobe Illustrator 2020 or newer on macOS and Windows. It is a CEP extension, so it appears under **Extensions (Legacy)** rather than the newer UXP plugin menu.
+Formlane 4.2.0 supports Adobe Illustrator 2020 or newer on macOS and Windows. It is a CEP extension, so it appears under **Extensions (Legacy)** rather than the newer UXP plugin menu.
 
 ## Before installing
 
 - Quit Illustrator completely.
-- Download and extract the Jaiafa Tools release ZIP.
+- Download and extract the Formlane release ZIP.
 - Keep the extracted folder name as `JaiafaTools`.
-- Remove an older Jaiafa Tools installation before copying a new version. The included installers do this automatically.
+- Formlane was previously named Jaiafa Tools. The existing folder and extension IDs are retained so updates use the same installation and settings.
+- Remove an older Formlane installation before copying a new version. The included installers do this automatically.
 
 ## macOS — automatic installation
 
@@ -15,7 +16,7 @@ Jaiafa Tools 4.1.5 supports Adobe Illustrator 2020 or newer on macOS and Windows
 2. Double-click `install-macos.command`.
 3. If macOS blocks it, Control-click the file, choose **Open**, and confirm.
 4. Wait for the success message, then restart Illustrator.
-5. Open **Window > Extensions (Legacy) > Jaiafa Tools**.
+5. Open **Window > Extensions (Legacy) > Formlane**.
 
 The installer copies the extension to:
 
@@ -53,7 +54,7 @@ defaults write com.adobe.CSXS.10 PlayerDebugMode 1
 2. Double-click `install-windows.bat`.
 3. If Windows asks for confirmation, allow the script to run.
 4. Restart Illustrator.
-5. Open **Window > Extensions (Legacy) > Jaiafa Tools**.
+5. Open **Window > Extensions (Legacy) > Formlane**.
 
 The installer copies the extension to:
 

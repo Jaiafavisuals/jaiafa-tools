@@ -1,0 +1,16 @@
+/* Formlane: crisp vector controls with restrained category accents. */
+.jt-icon{display:inline-block;width:18px;height:18px;flex-shrink:0;fill:none;stroke:currentColor;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round;pointer-events:none;vertical-align:middle}
+.tab-icon,.mock-icon{display:inline-flex;align-items:center;justify-content:center;line-height:1}
+.tab-icon .jt-icon{width:19px;height:19px}.mock-icon .jt-icon{width:27px;height:27px}
+.module-tab{transition:background .15s,border-color .15s,color .15s}
+.module-tab:not(.active) .tab-icon{color:#a9b2be}.module-tab.active .tab-icon{color:#8bbfff}
+.module-tab.ai-tab.active .tab-icon{color:#ffa36f}.module-tab.review-tab.active .tab-icon{color:#c5a6ff}
+.module-tab.qa-tab.active .tab-icon{color:#8ad6a1}.module-tab.data-tab.active .tab-icon{color:#c6a6f7}
+.has-ui-icon{display:inline-flex;align-items:center;justify-content:center;gap:7px}
+.has-ui-icon>.jt-icon,.icon-btn>.jt-icon{width:16px;height:16px}
+.icon-btn{display:inline-flex;align-items:center;justify-content:center}
+.header{align-items:center;gap:10px}.header>div{flex:1;min-width:0}.header .status-dot{flex-shrink:0;margin-top:0}
+.brand-mark{display:flex;align-items:center;justify-content:center;width:39px;height:39px;flex-shrink:0;border:1px solid #596a80;border-radius:11px;background:linear-gradient(145deg,#354357,#26303f);color:#b8d7ff;box-shadow:inset 0 1px 0 rgba(255,255,255,.08)}
+.brand-mark .jt-icon{width:26px;height:26px;stroke-width:1.8}
+button:focus-visible{outline:2px solid #91c4ff;outline-offset:3px}
+@media(prefers-reduced-motion:reduce){.module-tab{transition:none}}

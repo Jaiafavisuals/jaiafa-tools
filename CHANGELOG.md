@@ -2,6 +2,12 @@
 
 All notable changes to Jaiafa Tools are documented here.
 
+## 4.2.0 — Formlane
+
+- Renames the panel to Formlane with the tagline “Design. Review. Deliver.”
+- Adds original outline icons for navigation, mockup presets, and primary actions, with a compact Formlane brand mark.
+- Keeps existing extension IDs, install locations, document data, and settings compatible with Jaiafa Tools.
+
 ## 4.1.5 — local test build
 
 - Fixes font collector loading in CEP mixed-context, where CommonJS globals previously prevented the browser API from being exposed.

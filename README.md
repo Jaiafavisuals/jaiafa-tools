@@ -1,12 +1,12 @@
-# Jaiafa Tools
+# Formlane — Design. Review. Deliver.
 
-Jaiafa Tools is a productivity and design-assistance panel for Adobe Illustrator. It brings layout guides, typography, color, campaign resizing, presentation mockups, production QA, client review, batch generation, export handoff, persistent checkpoints, and AI-assisted art direction into one compact CEP extension.
+Formlane is a productivity and design-assistance panel for Adobe Illustrator. It brings layout guides, typography, color, campaign resizing, presentation mockups, production QA, client review, batch generation, export handoff, persistent checkpoints, and AI-assisted art direction into one compact CEP extension.
 
-**Current release:** 4.1.5 (local test build)<br>
+**Current release:** 4.2.0 (local test build)<br>
 **Compatibility:** Adobe Illustrator 2020 or newer (CEP/Extensions Legacy)  
 **Platforms:** macOS and Windows
 
-> Jaiafa Tools never changes artwork from an AI suggestion until you review and apply the proposed operations.
+> Formlane never changes artwork from an AI suggestion until you review and apply the proposed operations.
 
 ## Highlights
 
@@ -25,14 +25,14 @@ Jaiafa Tools is a productivity and design-assistance panel for Adobe Illustrator
 2. Quit Adobe Illustrator.
 3. Run `install-macos.command` on macOS or `install-windows.bat` on Windows.
 4. Restart Illustrator.
-5. Open **Window > Extensions (Legacy) > Jaiafa Tools**.
+5. Open **Window > Extensions (Legacy) > Formlane**.
 
 See [Installation](docs/INSTALLATION.md) for manual installation, updating, uninstalling, and troubleshooting.
 
 ## Quick start
 
 1. Open an Illustrator document and select the artwork you want to work with.
-2. Open **Jaiafa Tools** from Illustrator's **Extensions (Legacy)** menu.
+2. Open **Formlane** from Illustrator's **Extensions (Legacy)** menu.
 3. Choose a workspace:
    - **Grid, Type, Color** for everyday layout work.
    - **Social/Campaign** for new sizes and adapted artboards.
@@ -43,7 +43,7 @@ See [Installation](docs/INSTALLATION.md) for manual installation, updating, unin
 4. Preview or review generated changes before applying them.
 5. Save the Illustrator document to persist checkpoints, approval status, and document-level history.
 
-The complete workflows are in [How to use Jaiafa Tools](docs/USAGE.md).
+The complete workflows are in [How to use Formlane](docs/USAGE.md).
 
 ## DesignPilot privacy and safety
 

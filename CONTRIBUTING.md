@@ -1,12 +1,12 @@
 # Contributing
 
-Thank you for helping improve Jaiafa Tools. Focused bug reports, reproducible examples, documentation fixes, and carefully scoped features are welcome.
+Thank you for helping improve Formlane. Focused bug reports, reproducible examples, documentation fixes, and carefully scoped features are welcome.
 
 ## Report a bug
 
 Use the bug-report issue form and include:
 
-- Jaiafa Tools version;
+- Formlane version;
 - Illustrator version;
 - macOS or Windows version;
 - exact steps to reproduce;
@@ -22,7 +22,7 @@ Explain the designer pain point first, then describe the desired workflow. Inclu
 
 ## Development notes
 
-Jaiafa Tools is a CEP panel:
+Formlane is a CEP panel:
 
 - `index.html` contains the panel interface.
 - `css/` contains panel styling.

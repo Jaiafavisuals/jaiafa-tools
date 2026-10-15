@@ -33,10 +33,10 @@ function next(){try{
 var end=Math.min(cursor+64,scan.files.length);
 for(;cursor<end;cursor++){var file=scan.files[cursor];try{var info=fontInfo(file,deps);for(var n=0;n<info.names.length;n++){var name=info.names[n];if(needed[name]&&(!index[name]||index[name].restricted&&!info.restricted))index[name]={file:file,restricted:info.restricted};}}catch(ignore){}}
 if(cursor<scan.files.length){setTimeout(next,0);return;}
-var report=['JAIAFA TOOLS FONT COLLECTION','Only locally accessible fonts are collected. Adobe Fonts activation caches are excluded.','Font files may be shared only as permitted by their licenses.',''],copied=0,skipped=0,base=p.resolve(packagePath);
+var report=['FORMLANE FONT COLLECTION','Only locally accessible fonts are collected. Adobe Fonts activation caches are excluded.','Font files may be shared only as permitted by their licenses.',''],copied=0,skipped=0,base=p.resolve(packagePath);
 for(var i=0;i<requests.length;i++){
 var request=requests[i],folder=p.resolve(request.folder);if(folder.indexOf(base+p.sep)!==0)throw new Error('Font destination is outside the handoff package.');
-var dest=p.join(folder,'Fonts');if(!fs.existsSync(dest))fs.mkdirSync(dest);var used={},folderReport=['JAIAFA TOOLS FONT COLLECTION','Font files may be shared only as permitted by their licenses.',''];report.push(p.basename(folder));
+var dest=p.join(folder,'Fonts');if(!fs.existsSync(dest))fs.mkdirSync(dest);var used={},folderReport=['FORMLANE FONT COLLECTION','Font files may be shared only as permitted by their licenses.',''];report.push(p.basename(folder));
 for(var j=0;j<request.fonts.length;j++){
 var font=request.fonts[j],match=index[font],line;if(!match){skipped++;line='  UNAVAILABLE: '+font+' - not found in local font folders; the recipient may need to activate or license it.';report.push(line);folderReport.push(line);continue;}
 if(match.restricted){skipped++;line='  SKIPPED: '+font+' - restricted embedding or bitmap-only flag.';report.push(line);folderReport.push(line);continue;}

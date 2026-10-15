@@ -2,11 +2,11 @@
 <ExtensionManifest
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     ExtensionBundleId="com.jingo.jaiafatools"
-    ExtensionBundleName="Jaiafa Tools"
-    ExtensionBundleVersion="4.1.5"
+    ExtensionBundleName="Formlane"
+    ExtensionBundleVersion="4.2.0"
     Version="7.0">
     <ExtensionList>
-        <Extension Id="com.jingo.jaiafatools.panel" Version="4.1.5" />
+        <Extension Id="com.jingo.jaiafatools.panel" Version="4.2.0" />
     </ExtensionList>
     <ExecutionEnvironment>
         <HostList>
@@ -31,7 +31,7 @@
                 <Lifecycle><AutoVisible>true</AutoVisible></Lifecycle>
                 <UI>
                     <Type>Panel</Type>
-                    <Menu>Jaiafa Tools</Menu>
+                    <Menu>Formlane</Menu>
                     <Geometry>
                         <Size><Height>760</Height><Width>370</Width></Size>
                         <MinSize><Height>460</Height><Width>300</Width></MinSize>

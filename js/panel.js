@@ -10,7 +10,7 @@ function qa(sel){return document.querySelectorAll(sel)}
 function status(message,kind){var el=$('globalStatus');el.textContent=message||'';el.className='global-status'+(kind?' '+kind:'')}
 function esc(v){return String(v).replace(/\\/g,'\\\\').replace(/'/g,"\\'").replace(/\r/g,'\\r').replace(/\n/g,'\\n')}
 function enc(v){if(typeof v==='number')return isFinite(v)?String(v):'0';if(typeof v==='boolean')return v?'true':'false';return "'"+esc(v)+"'"}
-function parseHostResponse(raw){var text=String(raw==null?'':raw).replace(/^\uFEFF/,'').trim(),value;if(!text)return{success:false,message:'Illustrator returned an empty response.'};try{value=JSON.parse(text);if(typeof value==='string'){try{value=JSON.parse(value)}catch(ignore){}}if(value&&typeof value==='object')return value}catch(e){}return{success:false,message:'Illustrator returned an unreadable response. Reopen Jaiafa Tools and try again.'}}
+function parseHostResponse(raw){var text=String(raw==null?'':raw).replace(/^\uFEFF/,'').trim(),value;if(!text)return{success:false,message:'Illustrator returned an empty response.'};try{value=JSON.parse(text);if(typeof value==='string'){try{value=JSON.parse(value)}catch(ignore){}}if(value&&typeof value==='object')return value}catch(e){}return{success:false,message:'Illustrator returned an unreadable response. Reopen Formlane and try again.'}}
 function callHost(name,args,cb){var a=[],i;for(i=0;i<(args||[]).length;i++)a.push(enc(args[i]));var setup=extensionPath?'JT_setExtensionPath('+enc(extensionPath)+');':'';cs.evalScript(setup+name+'('+a.join(',')+')',function(raw){if(raw==='EvalScript error.'||raw==='EvalScript error. CEP bridge unavailable.'){cb({success:false,message:'Could not communicate with Illustrator.'});return}cb(parseHostResponse(raw))})}
 function num(id,fallback){var n=Number($(id).value);return isFinite(n)?n:fallback}
 function selectedApplyTo(){var el=q('input[name="applyTo"]:checked');return el?el.value:'artboard'}
@@ -80,7 +80,7 @@ function clamp(v,min,max,fallback){if(v===null||typeof v==='undefined'||v==='')v
 function cepNodeRequire(){try{if(window.cep_node&&window.cep_node.require)return window.cep_node.require}catch(ignore){}return null}
 function nodeBuffer(){var req=cepNodeRequire();try{return req?req('buffer').Buffer:null}catch(ignore){return null}}
 function readPreviewBase64(path){
-  if(!window.JTImageDataUrl)return{ok:false,message:'DesignPilot image validation is unavailable. Reinstall Jaiafa Tools.'};
+  if(!window.JTImageDataUrl)return{ok:false,message:'DesignPilot image validation is unavailable. Reinstall Formlane.'};
   var req=cepNodeRequire(),fs=null,BufferCtor=null,buffer,result;
   if(req){
     try{fs=req('fs');BufferCtor=req('buffer').Buffer}catch(ignore){}

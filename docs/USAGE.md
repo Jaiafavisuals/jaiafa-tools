@@ -1,6 +1,6 @@
-# How to use Jaiafa Tools
+# How to use Formlane
 
-Jaiafa Tools is organized around a safe workflow: select or capture artwork, configure the operation, preview or review the result when available, then apply or build it.
+Formlane is organized around a safe workflow: select or capture artwork, configure the operation, preview or review the result when available, then apply or build it.
 
 ## Grid and safe-area guides
 
@@ -169,7 +169,7 @@ Production PDFs preserve vectors and source image resolution. They use the bundl
 
 Save the document's latest changes before packaging PDFs. The PDF is generated from a temporary copy of the complete artwork, including objects in the bleed area, with only the chosen artboard exported. The preset is imported into Illustrator automatically. Client-review PDFs retain their separate flattened presentation workflow.
 
-Enable **Include local fonts — I have permission to share them** to collect the fonts used on each artboard into its `Fonts` folder. Jaiafa Tools searches standard local font folders and matches internal PostScript names, including mixed fonts within a text object. Use **Add folder** for another font location. `Fonts Report.txt` lists included, unavailable, restricted, or failed font references. Adobe Fonts activation caches are excluded; recipients need their own activation or license for unavailable fonts. Font licenses must permit sharing; embedding flags alone do not establish redistribution rights. Confirm linked-asset licensing before distribution. The package report records any missing links or text that Illustrator could not outline.
+Enable **Include local fonts — I have permission to share them** to collect the fonts used on each artboard into its `Fonts` folder. Formlane searches standard local font folders and matches internal PostScript names, including mixed fonts within a text object. Use **Add folder** for another font location. `Fonts Report.txt` lists included, unavailable, restricted, or failed font references. Adobe Fonts activation caches are excluded; recipients need their own activation or license for unavailable fonts. Font licenses must permit sharing; embedding flags alone do not establish redistribution rights. Confirm linked-asset licensing before distribution. The package report records any missing links or text that Illustrator could not outline.
 
 ## Recommended professional workflow
 
